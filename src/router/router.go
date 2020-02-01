@@ -21,6 +21,8 @@ func GetRouter() *gin.Engine {
 
 	router.GET("/menu", controller.GetMenu)
 
+	router.GET("/weather", controller.GetWeatherResponse)
+
 	router.NoRoute(handler.Error)
 
 	return router
