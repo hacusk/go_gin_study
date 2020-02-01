@@ -23,6 +23,8 @@ func GetRouter() *gin.Engine {
 
 	router.GET("/weather", controller.GetWeatherResponse)
 
+	router.GET("/subway", controller.GetSubwayResponse)
+
 	router.NoRoute(handler.Error)
 
 	return router

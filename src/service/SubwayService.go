@@ -10,12 +10,12 @@ import (
 	"example.com/go_gin_study/src/model"
 )
 
-// GetWeather return weather info
-func GetWeather() {
-
+// GetSubway return sapporo subway operation info
+func GetSubway() {
 	values := url.Values{}
-	values.Add("city", "016010")
-	resp, err := http.Get("http://weather.livedoor.com/forecast/webservice/json/v1" + "?" + values.Encode())
+	values.Add("resource_id", "2daf777d-cb9b-4348-abc7-b69cd742cc12")
+	values.Add("limit", "1")
+	resp, err := http.Get("https://ckan.pf-sapporo.jp/api/action/datastore_search" + "?" + values.Encode())
 
 	if err != nil {
 		fmt.Println(err)
@@ -23,11 +23,11 @@ func GetWeather() {
 
 	defer resp.Body.Close()
 
-	execute(resp)
+	ParseSubway(resp)
 }
 
-// http.Response to Parse Json
-func execute(resp *http.Response) {
+// ParseSubway http.Response to Parse Json
+func ParseSubway(resp *http.Response) {
 
 	body, err := ioutil.ReadAll(resp.Body)
 
@@ -35,7 +35,7 @@ func execute(resp *http.Response) {
 		fmt.Println(err)
 	}
 
-	data := new(model.Weather)
+	data := new(model.Subway)
 
 	if err := json.Unmarshal(body, data); err != nil {
 		fmt.Println("JSON Unmarshal error:", err)

@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetWeatherResponse View Controll "/subway"
+// GetWeatherResponse View Controll "/weather"
 func GetWeatherResponse(c *gin.Context) {
 	service.GetWeather()
 }
